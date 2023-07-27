@@ -5,4 +5,6 @@ RUN git clone -b dev https://github.com/camenduru/Text-To-Video-Finetuning
 RUN apt-get update && apt -y install aria2
 COPY ./download_list_zeroscope_v2_576w.txt .
 RUN aria2c -c -x 16 -s 16 -k 1M -i download_list_zeroscope_v2_576w.txt
-RUN pip install s3cmd
+RUN pip install boto3
+COPY ./bulkvideo.py .
+ENTRYPOINT ["python3", "./bulkvideo.py"]
