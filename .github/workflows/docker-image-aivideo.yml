@@ -17,6 +17,8 @@ jobs:
       contents: read
       packages: write
     steps:
+    - name: Try to get more space by freeing unnecessary tools
+      run: rm -rf /opt/hostedtoolcache
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Setup buildx
