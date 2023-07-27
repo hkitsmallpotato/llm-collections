@@ -1,0 +1,36 @@
+https://huggingface.co/cerspense/zeroscope_v2_576w/raw/main/model_index.json
+    dir=/content/model
+    out=model_index.json
+https://huggingface.co/cerspense/zeroscope_v2_576w/raw/main/vae/config.json
+    dir=/content/model/vae
+    out=config.json
+https://huggingface.co/cerspense/zeroscope_v2_576w/resolve/main/vae/diffusion_pytorch_model.bin
+    dir=/content/model/vae
+    out=diffusion_pytorch_model.bin
+https://huggingface.co/cerspense/zeroscope_v2_576w/raw/main/unet/config.json
+    dir=/content/model/unet
+    out=config.json
+https://huggingface.co/cerspense/zeroscope_v2_576w/resolve/main/unet/diffusion_pytorch_model.bin
+    dir=/content/model/unet
+    out=diffusion_pytorch_model.bin
+https://huggingface.co/cerspense/zeroscope_v2_576w/raw/main/text_encoder/config.json
+    dir=/content/model/text_encoder
+    out=config.json
+https://huggingface.co/cerspense/zeroscope_v2_576w/resolve/main/text_encoder/pytorch_model.bin
+    dir=/content/model/text_encoder
+    out=pytorch_model.bin
+https://huggingface.co/cerspense/zeroscope_v2_576w/raw/main/scheduler/scheduler_config.json
+    dir=/content/model/scheduler
+    out=scheduler_config.json
+https://huggingface.co/cerspense/zeroscope_v2_576w/raw/main/tokenizer/merges.txt
+    dir=/content/model/tokenizer
+    out=merges.txt
+https://huggingface.co/cerspense/zeroscope_v2_576w/raw/main/tokenizer/special_tokens_map.json
+    dir=/content/model/tokenizer
+    out=special_tokens_map.json
+https://huggingface.co/cerspense/zeroscope_v2_576w/raw/main/tokenizer/tokenizer_config.json
+    dir=/content/model/tokenizer
+    out=tokenizer_config.json
+https://huggingface.co/cerspense/zeroscope_v2_576w/raw/main/tokenizer/vocab.json
+    dir=/content/model/tokenizer
+    out=vocab.json
