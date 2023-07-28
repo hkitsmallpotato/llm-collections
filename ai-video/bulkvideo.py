@@ -45,10 +45,10 @@ for idx, req in enumerate(bulk_request):
         # -g {guidance_scale} -f {fps} -T {num_frames}
         result = subprocess.run(
             [sys.executable, "inference.py", "-m", "/content/model",
-            "-p", prompt, "-n", negative_prompt, "-W", 576, "-H", 320,
+            "-p", prompt, "-n", negative_prompt, "-W", "576", "-H", "320",
             "-o", output_path,
-            "-d", "cuda", "-x", "-s", 25, "-g", 23, 
-            "-f", 10, "-T", 30], 
+            "-d", "cuda", "-x", "-s", "25", "-g", "23", 
+            "-f", "10", "-T", "30"], 
             capture_output=True, text=True,
             cwd="/content/Text-To-Video-Finetuning"
         )
