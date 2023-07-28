@@ -1,8 +1,17 @@
 import boto3
+from boto3.s3.transfer import TransferConfig
 import os, sys, json, subprocess, time
 
 from os import listdir
 from os.path import isfile, join
+
+import logging
+
+boto3.set_stream_logger('', logging.DEBUG)
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+logging.debug("hello?")
 
 def get_file_only(mypath):
     return [f for f in listdir(mypath) if isfile(join(mypath, f))]
@@ -17,6 +26,7 @@ s3_bucket = os.environ['S3_BUCKET'].strip('\"')
 s3_basepath = os.environ['S3_BASEPATH'].strip('\"')
 local_basepath = os.environ['LOCAL_BASEPATH'].strip('\"')
 
+config = TransferConfig(use_threads=False)
 session = boto3.Session(aws_access_key_id=s3_keyid, aws_secret_access_key=s3_secret)
 
 s3_client = session.resource('s3', endpoint_url=s3_host)
@@ -26,7 +36,7 @@ bucket = s3_client.Bucket(s3_bucket)
 print("Read request file from S3...")
 
 original_filename = "bulk_request.json"
-bucket.download_file(s3_basepath + "/" + original_filename, original_filename)
+bucket.download_file(s3_basepath + "/" + original_filename, original_filename, Config=config)
 bulk_request = None
 with open(original_filename, "r") as f:
     bulk_request = json.load(f)
@@ -61,7 +71,7 @@ for idx, req in enumerate(bulk_request):
         local_path = join(output_path, get_file_only(output_path)[0])
         print("[Debug: {lp}]".format(lp=local_path))
         print("Uploading...")
-        bucket.upload_file(local_path, s3_basepath + "/outs/" + req['file'])
+        bucket.upload_file(local_path, s3_basepath + "/outs/" + req['file'], Config=config)
         end_time = time.time()
         print("---- Performance Statistic: Generation time = {gen}, Upload time = {up}".format(
             gen = gen_time - start_time,
