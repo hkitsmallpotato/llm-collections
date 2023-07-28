@@ -10,12 +10,13 @@ def get_file_only(mypath):
 # Initialize and setup
 print("Initialize...")
 
-s3_keyid = os.environ['S3_KEYID']
-s3_secret = os.environ['S3_SECRET']
-s3_host = os.environ['S3_HOST']
-s3_bucket = os.environ['S3_BUCKET']
-s3_basepath = os.environ['S3_BASEPATH']
-local_basepath = os.environ['LOCAL_BASEPATH']
+s3_keyid = os.environ['S3_KEYID'].strip('\"')
+s3_secret = os.environ['S3_SECRET'].strip('\"')
+s3_host = os.environ['S3_HOST'].strip('\"')
+s3_bucket = os.environ['S3_BUCKET'].strip('\"')
+s3_basepath = os.environ['S3_BASEPATH'].strip('\"')
+local_basepath = os.environ['LOCAL_BASEPATH'].strip('\"')
+
 session = boto3.Session(aws_access_key_id=s3_keyid, aws_secret_access_key=s3_secret)
 
 s3_client = session.resource('s3', endpoint_url=s3_host)
