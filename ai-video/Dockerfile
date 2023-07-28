@@ -2,7 +2,7 @@ FROM public.ecr.aws/saturncloud/saturn-python-pytorch:2023.05.01
 WORKDIR /content
 RUN pip install git+https://github.com/huggingface/diffusers transformers accelerate imageio[ffmpeg] -U einops omegaconf decord xformers==0.0.20 safetensors
 RUN sudo useradd -ms /bin/bash dockeruser && sudo usermod -aG sudo dockeruser
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN sudo echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 RUN sudo chown -R dockeruser:dockeruser /content && sudo chmod 755 /content
 USER dockeruser
 RUN git clone -b dev https://github.com/camenduru/Text-To-Video-Finetuning
