@@ -25,7 +25,7 @@ jobs:
           name: Build an artifact
           command: |
             docker build -t lemontea/zeroscope-aivideo-job:latest ./ai-video
-            echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
+            echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USER --password-stdin
             docker push lemontea/zeroscope-aivideo-job:latest
       - store_artifacts:
           path: example.txt
