@@ -15,6 +15,7 @@ s3_secret = os.environ['S3_SECRET']
 s3_host = os.environ['S3_HOST']
 s3_bucket = os.environ['S3_BUCKET']
 s3_basepath = os.environ['S3_BASEPATH']
+local_basepath = os.environ['LOCAL_BASEPATH']
 session = boto3.Session(aws_access_key_id=s3_keyid, aws_secret_access_key=s3_secret)
 
 s3_client = session.resource('s3', endpoint_url=s3_host)
@@ -39,18 +40,18 @@ for idx, req in enumerate(bulk_request):
         start_time = time.time()
         prompt = req['prompt']
         negative_prompt = "text, watermark, copyright, blurry, low resolution, blur, low quality"
-        output_path = "/content/output/" + req['file']
+        output_path = local_basepath + "/output/" + req['file']
         #python inference.py -m "/content/model" -p {prompt} -n {negative} 
         # -W 576 -H 320 -o /content/outputs -d cuda -x -s {num_steps} 
         # -g {guidance_scale} -f {fps} -T {num_frames}
         result = subprocess.run(
-            [sys.executable, "inference.py", "-m", "/content/model",
+            [sys.executable, "inference.py", "-m", local_basepath + "/model",
             "-p", prompt, "-n", negative_prompt, "-W", "576", "-H", "320",
             "-o", output_path,
             "-d", "cuda", "-x", "-s", "25", "-g", "23", 
             "-f", "10", "-T", "30"], 
             capture_output=True, text=True,
-            cwd="/content/Text-To-Video-Finetuning"
+            cwd = local_basepath + "/Text-To-Video-Finetuning"
         )
         print("stdout:\n", result.stdout)
         print("stderr:\n", result.stderr)
