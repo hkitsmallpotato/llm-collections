@@ -1,7 +1,7 @@
 FROM public.ecr.aws/saturncloud/saturn-python-pytorch:2023.05.01
 WORKDIR /content
 RUN pip install git+https://github.com/huggingface/diffusers transformers accelerate imageio[ffmpeg] -U einops omegaconf decord xformers==0.0.20 safetensors
-RUN sudo useradd -ms /bin/bash dockeruser && sudo usermod -aG sudo,work dockeruser && sudo usermod -aG work jovyan
+RUN sudo useradd -ms /bin/bash dockeruser && sudo groupadd work && sudo usermod -aG sudo,work dockeruser && sudo usermod -aG work jovyan
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers > /dev/null
 RUN sudo chown -R dockeruser:work /content && sudo chmod 775 /content
 USER dockeruser
