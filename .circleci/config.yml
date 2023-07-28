@@ -23,7 +23,10 @@ jobs:
       # Replace this with steps to build a package, or executable
       - run:
           name: Build an artifact
-          command: docker build -t lemonteaa/zeroscope-aivideo-job:latest ./ai-video
+          command: |
+            docker build -t lemontea/zeroscope-aivideo-job:latest ./ai-video
+            echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
+            docker push lemontea/zeroscope-aivideo-job:latest
       - store_artifacts:
           path: example.txt
   deploy:
